@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Android Labs 2</string>
-    <string name="HeaderText">Regarder Mon GUI!</string>
+    <string name="HeaderText">Lab 2 GUI</string>
     <string name="ButtonMessage">Click Ici</string>
     <string name="CheckBoxText">Regarder Ceci</string>
     <string name="SwitchString">Selecte marche / arrete</string>
-    <string name="EditTextMessage">Tape ici</string>
+    <string name="EditTextMessage">Tape Votre Nom Ici</string>
     <string name="ToastText">Voici plus d\'information</string>
     <string name="snackbar_message">"Le Switch Est "</string>
     <string name="on">Allumer</string>
