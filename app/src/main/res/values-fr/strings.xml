@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Android Labs</string>
-    <string name="hello_message">Bonjour Planète</string>
-    <string name="ButtonText">Je suis un button</string>
+    <string name="app_name">Android Labs 2</string>
+    <string name="HeaderText">Regarder Mon GUI!</string>
+    <string name="ButtonMessage">Click Ici</string>
+    <string name="CheckBoxText">Regarder Ceci</string>
+    <string name="SwitchString">Selecte marche / arrete</string>
+    <string name="EditTextMessage">Tape ici</string>
+    <string name="ToastText">Voici plus d\'information</string>
+    <string name="snackbar_message">"Le Switch Est "</string>
+    <string name="on">Allumer</string>
+    <string name="off">Fermer</string>
+    <string name="hello_message">Bonjour</string>
+    <string name="ButtonText">Je Suis Un Button</string>
 </resources>
