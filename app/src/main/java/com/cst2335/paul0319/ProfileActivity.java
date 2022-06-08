@@ -96,5 +96,5 @@ public class ProfileActivity extends AppCompatActivity {
         log("In onDestroy");
     }
 
-    private void log(String message) { Log.i(ACTIVITY_NAME, message); }
+    private void log(String message) { Log.e(ACTIVITY_NAME, message); }
 }
