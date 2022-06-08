@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent goToProfile = new Intent(MainActivity.this, ProfileActivity.class);
                 goToProfile.putExtra(INTENT_EMAIL, emailInput.getText().toString());
+
+                startActivity(goToProfile);
             }
         });
 
