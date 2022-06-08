@@ -2,48 +2,35 @@ package com.cst2335.paul0319;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Switch;
-import android.widget.Toast;
-
-import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_constraint);
+        setContentView(R.layout.activity_main);
 
-        Toast toast_message = Toast.makeText(this, R.string.ToastText, Toast.LENGTH_LONG);
+    }
 
-        Button button = findViewById(R.id.button1);
-        Switch switchThing = findViewById(R.id.switch1);
+    @Override
+    protected void onPause() {
+        super.onPause();
 
+        SharedPreferences sharedPreference = getSharedPreferences(getString(R.string.sharedPreference), Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedPreference_Editor = sharedPreference.edit();
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toast_message.show();
-            }
-        });
+        // Put Email
+        sharedPreference_Editor.putString(getString(R.string.sharedPreference_Email), email);
 
-        switchThing.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        // Put Password
+        sharedPreference_Editor.putString(getString(R.string.sharedPreference_Password), password);
 
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                String msg = getString(R.string.snackbar_message);
-
-                if (isChecked) { msg += getString(R.string.on); }
-                else { msg += getString(R.string.off); }
-
-                Snackbar snackbar = Snackbar.make(buttonView,  msg, Snackbar.LENGTH_LONG);
-                snackbar.show();
-                snackbar.setAction("Undo", click -> buttonView.setChecked(!isChecked));
-            }
-        });
+        // Save Changes
+        sharedPreference_Editor.apply();
     }
 }

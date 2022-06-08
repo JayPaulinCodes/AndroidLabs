@@ -1,14 +1,11 @@
 <resources>
-    <string name="app_name">Android Labs</string>
+    <string name="app_name">Android Lab 3</string>
     <string name="HeaderText">Lab 2 GUI</string>
-    <string name="ButtonMessage">Click Here</string>
-    <string name="CheckBoxText">Check This Out!</string>
-    <string name="SwitchString">Switch on / off</string>
-    <string name="EditTextMessage">Enter Name Here</string>
-    <string name="ToastText">Here is more information</string>
-    <string name="snackbar_message">"The Switch Is "</string>
-    <string name="on">On</string>
-    <string name="off">Off</string>
-    <string name="hello_message">Hello</string>
-    <string name="ButtonText">I\'m A Button</string>
+    <string name="sharedPreference">Shared_Preference</string>
+    <string name="sharedPreference_Email">Email</string>
+    <string name="sharedPreference_Password">Password</string>
+    <string name="input_1_label">Enter Your Email Address</string>
+    <string name="input_1_placeholder">Type Email Here</string>
+    <string name="input_2_label">Enter Your Password</string>
+    <string name="input_2_placeholder">Type Password Here</string>
 </resources>

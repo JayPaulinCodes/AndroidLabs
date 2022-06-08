@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Android Labs 2</string>
+    <string name="app_name">Android Labs 3</string>
     <string name="HeaderText">Lab 2 GUI</string>
-    <string name="ButtonMessage">Click Ici</string>
-    <string name="CheckBoxText">Regarder Ceci</string>
-    <string name="SwitchString">Selecte marche / arrete</string>
-    <string name="EditTextMessage">Tape Votre Nom Ici</string>
-    <string name="ToastText">Voici plus d\'information</string>
-    <string name="snackbar_message">"Le Switch Est "</string>
-    <string name="on">Allumer</string>
-    <string name="off">Fermer</string>
-    <string name="hello_message">Bonjour</string>
-    <string name="ButtonText">Je Suis Un Button</string>
+    <string name="sharedPreference">Shared_Preference</string>
+    <string name="sharedPreference_Email">Address_Email</string>
+    <string name="sharedPreference_Password">Mot_De_Passe</string>
+    <string name="input_1_label">Entre Votre Addresse Email</string>
+    <string name="input_1_placeholder">Tape Addresse Email Ici</string>
+    <string name="input_2_label">Enter Votre Mot De Passe</string>
+    <string name="input_2_placeholder">Tape Mot De Passe Ici</string>
 </resources>
