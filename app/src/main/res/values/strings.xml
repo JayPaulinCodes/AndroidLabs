@@ -1,11 +1,16 @@
 <resources>
     <string name="app_name">Android Lab 3</string>
-    <string name="HeaderText">Lab 2 GUI</string>
-    <string name="sharedPreference">Shared_Preference</string>
-    <string name="sharedPreference_Email">Email</string>
-    <string name="sharedPreference_Password">Password</string>
+    <string name="HeaderText">Your Profile</string>
     <string name="input_1_label">Enter Your Email Address</string>
-    <string name="input_1_placeholder">Type Email Here</string>
+    <string name="input_1_hint">Type Email Here</string>
     <string name="input_2_label">Enter Your Password</string>
-    <string name="input_2_placeholder">Type Password Here</string>
+    <string name="input_2_hint">Type Password Here</string>
+    <string name="button_login">Login</string>
+
+    <string name="input_3_label">Your Name</string>
+    <string name="input_3_hint">Enter Your Name</string>
+    <string name="input_4_label">Your Email</string>
+    <string name="input_4_hint">Enter Your Email</string>
+    <string name="input_5_label">Your Picture</string>
+    <string name="input_5_hint">Click the button above to take a picture</string>
 </resources>

@@ -27,7 +27,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:text="@string/input_1_placeholder" />
+            android:id="@+id/input_email"
+            android:hint="@string/input_1_hint" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -42,7 +43,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:text="@string/input_2_placeholder" />
+            android:id="@+id/input_password"
+            android:hint="@string/input_2_hint" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_button"
+            android:text="@string/button_login" />
 
     </LinearLayout>
 
