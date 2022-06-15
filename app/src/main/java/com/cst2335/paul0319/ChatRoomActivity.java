@@ -97,10 +97,9 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = getLayoutInflater();
             MessageObject msgObject = (MessageObject) getItem(position);
 
-            return msgObject.buildView(inflater, parent);
+            return msgObject.buildView(getLayoutInflater(), parent);
         }
 
 
