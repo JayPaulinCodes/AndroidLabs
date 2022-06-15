@@ -34,6 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
         log("In onCreate, setting element variables");
         ImageButton image_button = findViewById(R.id.input_5_picture);
         EditText emailInput = findViewById(R.id.input_4_email);
+        Button chatRoomButton = findViewById(R.id.button_chat);
 
         log("In onCreate, setting email text based off of the intent passed values");
         emailInput.setText(fromMain.getStringExtra(MainActivity.INTENT_EMAIL));
@@ -61,6 +62,15 @@ public class ProfileActivity extends AppCompatActivity {
                 if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                     myPictureTakerLauncher.launch(takePictureIntent);
                 }
+            }
+        });
+
+        chatRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToChatRoom = new Intent(ProfileActivity.this, ChatRoomActivity.class);
+
+                startActivity(goToChatRoom);
             }
         });
 
