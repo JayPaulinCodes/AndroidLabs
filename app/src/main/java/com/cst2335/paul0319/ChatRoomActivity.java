@@ -38,7 +38,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         button_receive.setOnClickListener(click -> { buttonPush(editText_message, MessageType.RECEIVE); });
 
         // Handle long push to delete message
-        listView_messages.setOnItemLongClickListener( (parent, b, position, id) -> {
+        listView_messages.setOnItemLongClickListener( (p, b, position, id) -> {
             String alertMessage = getString(R.string.chatRoom_alertDialog_message);
             Log.i("XXX", "onCreate: " + alertMessage);
             alertMessage = alertMessage.replace("%row%", String.valueOf(position));
