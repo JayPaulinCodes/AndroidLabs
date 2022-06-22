@@ -21,7 +21,8 @@
             <ListView
                 android:id="@+id/chatRoom_listView_messages"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:transcriptMode="alwaysScroll">
 
             </ListView>
 

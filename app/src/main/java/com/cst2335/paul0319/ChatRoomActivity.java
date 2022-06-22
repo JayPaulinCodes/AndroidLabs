@@ -3,30 +3,27 @@ package com.cst2335.paul0319;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ChatRoomActivity extends AppCompatActivity {
 
     MyOpenHelper myOpener;
     SQLiteDatabase Database;
     MyListAdapter listAdapter;
-    private ArrayList<MessageObject> messages = new ArrayList<>(  );
+    private final ArrayList<MessageObject> messages = new ArrayList<>(  );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +40,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                             ),
                 null);
 
-        printCursor(results, MyOpenHelper.VERSION);
+        printCursor(results);
 
         int id_index = results.getColumnIndex(MyOpenHelper.COL_ID);
         int message_index = results.getColumnIndex(MyOpenHelper.COL_MESSAGE);
@@ -73,8 +70,8 @@ public class ChatRoomActivity extends AppCompatActivity {
         listView_messages.setAdapter(listAdapter = new MyListAdapter());
 
         // Handle button push
-        button_send.setOnClickListener(click -> { buttonPush(editText_message, MessageType.SEND); });
-        button_receive.setOnClickListener(click -> { buttonPush(editText_message, MessageType.RECEIVE); });
+        button_send.setOnClickListener(click -> buttonPush(editText_message, MessageType.SEND));
+        button_receive.setOnClickListener(click -> buttonPush(editText_message, MessageType.RECEIVE));
 
         // Handle long push to delete message
         listView_messages.setOnItemLongClickListener( (p, b, position, id) -> {
@@ -139,18 +136,43 @@ public class ChatRoomActivity extends AppCompatActivity {
         listAdapter.notifyDataSetChanged();
     }
 
-    private void printCursor(Cursor cursor, int version) {
+    @SuppressLint("DefaultLocale")
+    private void printCursor(Cursor cursor) {
+        int id_index = cursor.getColumnIndex(MyOpenHelper.COL_ID);
+        int message_index = cursor.getColumnIndex(MyOpenHelper.COL_MESSAGE);
+        int send_or_receive_index = cursor.getColumnIndex(MyOpenHelper.COL_SEND_RECEIVE);
+        String column_names = "";
+        String rows = "";
+
         for (int i = 0; i < cursor.getColumnNames().length; i++) {
-            cursor.getColumnNames()[i]
+            if (i == 0) column_names = column_names.concat(cursor.getColumnNames()[i]);
+            else column_names = column_names.concat(", " + cursor.getColumnNames()[i]);
         }
+
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(id_index);
+            int send_or_receive = cursor.getInt(send_or_receive_index);
+            String message = cursor.getString(message_index);
+
+            rows = rows.concat(String.format(
+                "Row #%d, _id: %d, sendOrReceive: %d, message: %s%n",
+                id,
+                id,
+                send_or_receive,
+                message
+            ));
+        }
+
+        cursor.moveToPosition(-1);
 
         String log = String.format(
                 "Database Version Number %d%nNumber Of Columns: %d%n"  +
-                "Column Names: %s%nNumber Of Rows In The Cursor: %d%n%n",
-                version,
+                "Column Names: %s%nNumber Of Rows In The Cursor: %d%nRow Results:%n%s%n",
+                MyOpenHelper.VERSION,
                 cursor.getColumnCount(),
-                Arrays.toString(cursor.getColumnNames()),
-                cursor.getCount()
+                column_names,
+                cursor.getCount(),
+                rows
         );
 
         Log.i("PRINT_CURSOR", log);
