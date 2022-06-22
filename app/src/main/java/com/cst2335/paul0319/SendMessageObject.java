@@ -8,7 +8,11 @@ import android.widget.TextView;
 public class SendMessageObject extends MessageObject {
 
     public SendMessageObject(String content) {
-        super(content);
+        super(MessageType.SEND, content);
+    }
+
+    public SendMessageObject(String content, long id) {
+        super(MessageType.SEND, content, id);
     }
 
     @Override
@@ -21,4 +25,5 @@ public class SendMessageObject extends MessageObject {
 
         return newView;
     }
+
 }

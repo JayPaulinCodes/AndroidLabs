@@ -8,7 +8,11 @@ import android.widget.TextView;
 public class ReceiveMessageObject extends MessageObject {
 
     public ReceiveMessageObject(String content) {
-        super(content);
+        super(MessageType.RECEIVE, content);
+    }
+
+    public ReceiveMessageObject(String content, long id) {
+        super(MessageType.RECEIVE, content, id);
     }
 
     @Override
@@ -21,4 +25,5 @@ public class ReceiveMessageObject extends MessageObject {
 
         return newView;
     }
+
 }
