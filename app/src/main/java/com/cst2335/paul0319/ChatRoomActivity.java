@@ -23,6 +23,10 @@ import java.util.ArrayList;
 
 public class ChatRoomActivity extends AppCompatActivity {
 
+    public final static String INTENT_MESSAGE_TEXT = "Intent_Message_Text";
+    public final static String INTENT_MESSAGE_ID = "Intent_Message_Id";
+    public final static String INTENT_MESSAGE_TYPE = "Intent_Message_Type";
+
     private final ArrayList<MessageObject> messages = new ArrayList<>(  );
     MyOpenHelper myOpener;
     SQLiteDatabase Database;
@@ -107,18 +111,32 @@ public class ChatRoomActivity extends AppCompatActivity {
         });
 
         listView_messages.setOnItemClickListener((list, view, position, id) -> {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            DetailsFragment detailsFragment = new DetailsFragment();
+            MessageObject messageObject = (MessageObject) listAdapter.getItem(position);
+            Bundle args = new Bundle();
+
+            args.putString(INTENT_MESSAGE_TEXT, messageObject.getContent());
+            args.putLong(INTENT_MESSAGE_ID, messageObject.getId());
+            args.putString(INTENT_MESSAGE_TYPE, messageObject.getMessageType().toString());
+
+            detailsFragment.setArguments(args);
+
             if (isTablet) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                DetailsFragment detailsFragment = new DetailsFragment();
+
                 fragmentManager
                         .beginTransaction()
                         .replace(R.id.chatRoom_frame_layout, detailsFragment)
                         .commit();
+
             } else {
-                Intent goToEmptyActivity= new Intent(ChatRoomActivity.this, EmptyActivity.class);
+                Intent goToEmptyActivity = new Intent(ChatRoomActivity.this, EmptyActivity.class);
 
-                startActivity(goToEmptyActivity);
+                goToEmptyActivity.putExtra(INTENT_MESSAGE_TEXT, args.getString(INTENT_MESSAGE_TEXT));
+                goToEmptyActivity.putExtra(INTENT_MESSAGE_ID, args.getLong(INTENT_MESSAGE_ID));
+                goToEmptyActivity.putExtra(INTENT_MESSAGE_TYPE, args.getString(INTENT_MESSAGE_TYPE));
 
+                startActivity(goToEmptyActivity, args);
             }
         });
     }

@@ -1,63 +1,85 @@
 package com.cst2335.paul0319;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DetailsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_MESSAGE_TEXT = ChatRoomActivity.INTENT_MESSAGE_TEXT;
+    private static final String ARG_MESSAGE_ID = ChatRoomActivity.INTENT_MESSAGE_ID;
+    private static final String ARG_MESSAGE_TYPE = ChatRoomActivity.INTENT_MESSAGE_TYPE;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private final DetailsFragment INSTANCE = this;
+
+    private String messageText;
+    private long messageId;
+    private String messageType;
 
     public DetailsFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DetailsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DetailsFragment newInstance(String param1, String param2) {
-        DetailsFragment fragment = new DetailsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+//    public static DetailsFragment newInstance(String messageText, long messageId, String messageType) {
+//        DetailsFragment fragment = new DetailsFragment();
+//        Bundle args = new Bundle();
+//        args.putString(ARG_MESSAGE_TEXT, messageText);
+//        args.putLong(ARG_MESSAGE_ID, messageId);
+//        args.putString(ARG_MESSAGE_TYPE, messageType);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+        if(savedInstanceState == null){
+            // Get back arguments
+            if(getArguments() != null) {
+                messageText = getArguments().getString(ARG_MESSAGE_TEXT);
+                messageId = getArguments().getLong(ARG_MESSAGE_ID);
+                messageType = getArguments().getString(ARG_MESSAGE_TYPE);
+            }
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_details, container, false);
+
+        TextView messageHereText = view.findViewById(R.id.detailsFragment_message_text);
+        TextView messageIdText = view.findViewById(R.id.detailsFragment_message_id);
+        CheckBox sentMessageCheckbox = view.findViewById(R.id.detailsFragment_sent_message_checkbox);
+        Button hideButton = view.findViewById(R.id.detailsFragment_hide_button);
+
+        messageHereText.setText(messageText);
+        messageIdText.setText(String.format("ID=%d", messageId));
+        sentMessageCheckbox.setChecked((messageType == MessageType.SEND.toString()));
+
+
+
+        hideButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getParentFragmentManager()
+                        .beginTransaction()
+                        .remove(getParentFragmentManager().findFragmentById(R.id.chatRoom_frame_layout))
+                        .commit();
+            }
+        });
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_details, container, false);
+        return view;
     }
 }

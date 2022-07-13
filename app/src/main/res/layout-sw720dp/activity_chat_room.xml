@@ -47,7 +47,8 @@
         android:id="@+id/chatRoom_frame_layout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true">
+        android:layout_toRightOf="@+id/chatRoom_listView_messages"
+        android:layout_marginLeft="5dp">
 
     </FrameLayout>
 
