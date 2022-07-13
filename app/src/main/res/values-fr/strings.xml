@@ -22,4 +22,8 @@
     <string name="chatRoom_alertDialog_message">Voulez vous supprimer cet message?\nLe row est: %row%\nLe id est: %id%</string>
     <string name="chatRoom_alertDialog_yes">Oui</string>
     <string name="chatRoom_alertDialog_no">Non</string>
+    <string name="detailsFragment_message_text">Message Here</string>
+    <string name="detailsFragment_message_id">ID=</string>
+    <string name="detailsFragment_sent_message_checkbox">Is a send message</string>
+    <string name="detailsFragment_hide_button">Hide</string>
 </resources>

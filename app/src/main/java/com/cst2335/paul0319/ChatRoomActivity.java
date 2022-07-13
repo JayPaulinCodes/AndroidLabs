@@ -2,9 +2,11 @@ package com.cst2335.paul0319;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -14,21 +16,27 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class ChatRoomActivity extends AppCompatActivity {
 
+    private final ArrayList<MessageObject> messages = new ArrayList<>(  );
     MyOpenHelper myOpener;
     SQLiteDatabase Database;
     MyListAdapter listAdapter;
-    private final ArrayList<MessageObject> messages = new ArrayList<>(  );
+    private boolean isTablet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
+
+        FrameLayout frame_layout = findViewById(R.id.chatRoom_frame_layout);
+
+        isTablet = (frame_layout != null);
 
         myOpener = new MyOpenHelper(this);
         Database = myOpener.getWritableDatabase();
@@ -96,6 +104,22 @@ public class ChatRoomActivity extends AppCompatActivity {
                     .create()
                     .show();
             return true;
+        });
+
+        listView_messages.setOnItemClickListener((list, view, position, id) -> {
+            if (isTablet) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                DetailsFragment detailsFragment = new DetailsFragment();
+                fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.chatRoom_frame_layout, detailsFragment)
+                        .commit();
+            } else {
+                Intent goToEmptyActivity= new Intent(ChatRoomActivity.this, EmptyActivity.class);
+
+                startActivity(goToEmptyActivity);
+
+            }
         });
     }
 
