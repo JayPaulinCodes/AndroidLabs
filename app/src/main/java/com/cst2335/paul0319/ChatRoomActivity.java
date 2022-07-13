@@ -2,9 +2,12 @@ package com.cst2335.paul0319;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -14,21 +17,31 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class ChatRoomActivity extends AppCompatActivity {
 
+    public final static String INTENT_MESSAGE_TEXT = "Intent_Message_Text";
+    public final static String INTENT_MESSAGE_ID = "Intent_Message_Id";
+    public final static String INTENT_MESSAGE_TYPE = "Intent_Message_Type";
+
+    private final ArrayList<MessageObject> messages = new ArrayList<>(  );
     MyOpenHelper myOpener;
     SQLiteDatabase Database;
     MyListAdapter listAdapter;
-    private final ArrayList<MessageObject> messages = new ArrayList<>(  );
+    private boolean isTablet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
+
+        FrameLayout frame_layout = findViewById(R.id.chatRoom_frame_layout);
+
+        isTablet = (frame_layout != null);
 
         myOpener = new MyOpenHelper(this);
         Database = myOpener.getWritableDatabase();
@@ -91,11 +104,53 @@ public class ChatRoomActivity extends AppCompatActivity {
                         );
                         messages.remove(position);
                         listAdapter.notifyDataSetChanged();
+                        if (isTablet) {
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            Fragment frag = fragmentManager.findFragmentById(R.id.chatRoom_frame_layout);
+
+                            if (frag != null) {
+                                fragmentManager
+                                        .beginTransaction()
+                                        .remove(frag)
+                                        .commit();
+                            }
+
+                        }
                     })
                     .setNegativeButton(getString(R.string.chatRoom_alertDialog_no), (click, arg) -> {})
                     .create()
                     .show();
             return true;
+        });
+
+        listView_messages.setOnItemClickListener((list, view, position, id) -> {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            DetailsFragment detailsFragment = new DetailsFragment();
+            MessageObject messageObject = (MessageObject) listAdapter.getItem(position);
+            Bundle args = new Bundle();
+
+            args.putString(INTENT_MESSAGE_TEXT, messageObject.getContent());
+            args.putLong(INTENT_MESSAGE_ID, messageObject.getId());
+            args.putString(INTENT_MESSAGE_TYPE, messageObject.getMessageType().toString());
+
+            detailsFragment.setArguments(args);
+
+            if (isTablet) {
+
+                fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.chatRoom_frame_layout, detailsFragment)
+                        .commit();
+
+            } else {
+                Intent goToEmptyActivity = new Intent(ChatRoomActivity.this, EmptyActivity.class);
+
+                goToEmptyActivity.putExtra(INTENT_MESSAGE_TEXT, args.getString(INTENT_MESSAGE_TEXT));
+                goToEmptyActivity.putExtra(INTENT_MESSAGE_ID, args.getLong(INTENT_MESSAGE_ID));
+                goToEmptyActivity.putExtra(INTENT_MESSAGE_TYPE, args.getString(INTENT_MESSAGE_TYPE));
+
+                startActivity(goToEmptyActivity, args);
+            }
         });
     }
 
