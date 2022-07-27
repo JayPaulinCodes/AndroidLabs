@@ -66,6 +66,12 @@
             android:layout_height="wrap_content"
             android:text="@string/button_chat_text"/>
 
+        <Button
+            android:id="@+id/button_to_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_to_toolbar_text"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

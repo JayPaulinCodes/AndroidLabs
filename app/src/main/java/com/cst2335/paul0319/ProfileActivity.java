@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toolbar;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -35,6 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
         ImageButton image_button = findViewById(R.id.input_5_picture);
         EditText emailInput = findViewById(R.id.input_4_email);
         Button chatRoomButton = findViewById(R.id.button_chat);
+        Button toolbarPageButton = findViewById(R.id.button_to_toolbar);
 
         log("In onCreate, setting email text based off of the intent passed values");
         emailInput.setText(fromMain.getStringExtra(MainActivity.INTENT_EMAIL));
@@ -71,6 +73,15 @@ public class ProfileActivity extends AppCompatActivity {
                 Intent goToChatRoom = new Intent(ProfileActivity.this, ChatRoomActivity.class);
 
                 startActivity(goToChatRoom);
+            }
+        });
+
+        toolbarPageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToToolbarPage = new Intent(ProfileActivity.this, TestToolbar.class);
+
+                startActivity(goToToolbarPage);
             }
         });
 

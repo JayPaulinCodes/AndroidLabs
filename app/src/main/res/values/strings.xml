@@ -27,4 +27,15 @@
     <string name="detailsFragment_message_id">ID=</string>
     <string name="detailsFragment_sent_message_checkbox">Is a send message</string>
     <string name="detailsFragment_hide_button">Hide</string>
+    <string name="button_to_toolbar_text">Go to Toolbar page</string>
+    <string name="menuItem_choice1_text">Item 1</string>
+    <string name="menuItem_choice2_text">Item 2</string>
+    <string name="menuItem_choice3_text">Item 3</string>
+    <string name="menuItem_choice4_text">Item 4</string>
+    <string name="drawerMenu_navigate_goToChat_text">Chat Page</string>
+    <string name="drawerMenu_navigate_goBackToProfile_text">Back To Profile</string>
+    <string name="drawerMenu_navigate_text">Navigate</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="headerText">Header Section!</string>
 </resources>
